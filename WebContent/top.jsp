@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD id=Head1>
@@ -57,11 +58,17 @@ P {
 								</TR>
 								<TR>
 									<TD height=35 align="right">
-										当前用户：XXXX
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										<A href="#" target=_top><FONT color=red>修改密码</FONT></A>
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										<A href="#" target=_top><FONT color=red>安全退出</FONT></A>
+										<c:if test="${not empty existUser }">
+											当前用户：${ existUser.user_name }
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<A href="${pageContext.request.contextPath }/user_exit.action" target=_top><FONT color=red>安全退出</FONT></A>
+										</c:if>
+										<c:if test="${empty existUser }">
+											<A href="${pageContext.request.contextPath }/login.jsp" target=_top><FONT color=red>登录</FONT></A>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<A href="${pageContext.request.contextPath }/regist.jsp" target=_top><FONT color=red>注册</FONT></A>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>
 									</TD>
 								</TR>
 							</TBODY>

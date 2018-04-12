@@ -2,13 +2,18 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
-	
+
 <struts>
 	<package name="crm" extends="struts-default" namespace="/">
-	<!-- 由struts2自己管理Action -->
-		<!-- <action name="customer_*" class="com.crm.web.action.CustomerAction" method="{1}"/> -->
+		<!-- 配置全局的结果页面 -->
+		<global-results>
+			<result name="login" type="redirect">/login.jsp</result>
+		</global-results>
 		<!-- 由spring管理Action，class写spring的id值 -->
-		<action name="customer_*" class="customerAction" method="{1}"></action>
+		<!-- 配置用户的模块 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="loginOK" type="redirect">/index.jsp</result>
+		</action>
 	</package>
 </struts>
 

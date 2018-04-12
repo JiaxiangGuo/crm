@@ -5,17 +5,68 @@
 <HEAD>
 <META http-equiv=Content-Type content="text/html; charset=utf-8">
 <STYLE type=text/css>
-BODY {
-	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: 宋体
-}
-TD {
-	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: 宋体
-}
+	BODY {
+		FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: 宋体
+	}
+	TD {
+		FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: 宋体
+	}
+	
+	.error{
+		color:red;
+	}
+	
 </STYLE>
+<META content="MSHTML 6.00.6000.16809" name=GENERATOR>
 
-<META content="MSHTML 6.00.6000.16809" name=GENERATOR></HEAD>
+<!-- 引入JQ -->
+<script type="text/javascript" src="${ pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript">
+	// 验证登录名
+	function checkCode(){
+		// 获取用户输入的登录名
+		var code = $("#user_code").val();
+		// 进行判断，说明没有输入登录名
+		if(code.trim() == ""){
+			// 给提示
+			$("#codeId").addClass("error");
+			$("#codeId").html("登录名不能为空");
+		}else{
+			// 登录名不为空，ajax请求，验证
+			var url = "${pageContext.request.contextPath}/user_checkCode.action";
+			var param = {"user_code":code};
+			$.post(url,param,function(data){
+				// 操作data，进行判断
+				if(data && data == "no"){
+					// 提示
+					$("#codeId").addClass("error");
+					$("#codeId").html("登录名已经存在");
+				}else{
+					$("#codeId").removeClass("error");
+					$("#codeId").html("可以注册");
+				}
+			});
+		}
+	}
+	
+ 	// 可以阻止表单的提交
+	function checkForm(){
+		// 先让校验名称的方法先执行以下
+		checkCode();
+		// 获取error的数量，如果数量 > 0，说明存在错误，不能提交表单
+		if($(".error").size() > 0){
+			return false;
+		}
+	} 
+	
+</script>
+
+</HEAD>
+
 <BODY>
-<FORM id=form1 name=form1 action="${ pageContext.request.contextPath }/user_login.action" onsubmit="javascript:return WebForm_OnSubmit();" method=post>
+
+<FORM id=form1 name=form1 action="${ pageContext.request.contextPath }/user_regist.action" onsubmit="return checkForm()" method=post>
 
 <DIV id=UpdatePanel1>
 <DIV id=div1 
@@ -63,21 +114,28 @@ style="LEFT: 0px; POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: #0066ff"></DIV
                   	style="FONT-WEIGHT: bold; VISIBILITY: hidden; COLOR: white">请输入密码</SPAN>
                   </TD>
               </TR>
-            
+              
+              <TR>
+                <TD style="HEIGHT: 28px">用户姓名：</TD>
+                <TD style="HEIGHT: 28px">
+                	<INPUT id="user_name" style="WIDTH: 130px" type="text" name="user_name">
+                </TD>
+                
+                <TD style="HEIGHT: 28px">
+                	<SPAN id=RequiredFieldValidator4 style="FONT-WEIGHT: bold;"></SPAN>
+                </TD></TR>
+              
+              <TR>
                 <TD style="HEIGHT: 18px"></TD>
                 <TD style="HEIGHT: 18px"></TD>
                 <TD style="HEIGHT: 18px"></TD></TR>
               <TR>
                 <TD></TD>
-                <TD><INPUT id=btn 
-                  style="BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px" 
-                  onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("btn", "", true, "", "", false, false))' 
-                  type=image src="images/login_button.gif" name=btn> 
-              </TD>
-              <td>
-              <a href="${pageContext.request.contextPath }/regist.jsp">  没有账户？点击注册！</a>
-              </td>
-              </TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+                <TD>
+                  
+                <input type="submit" value="注册" />  
+                  
+              </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
   <TR>
     <TD><IMG src="images/login_3.jpg" 
 border=0></TD></TR></TBODY></TABLE></DIV></DIV>
