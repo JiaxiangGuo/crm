@@ -14,6 +14,9 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="loginOK" type="redirect">/index.jsp</result>
 		</action>
+		<action name="customer_*" class="customerAction" method="{1}">
+			<result name="customerList">/jsp/customer/list.jsp</result>
+		</action>
 	</package>
 </struts>
 
