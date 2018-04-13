@@ -124,9 +124,13 @@
 												<option value="5" <c:if test="${page.pageSize==5 }">selected</c:if>>5</option>
 												</select>
 												条
-												[<A href="javascript:to_page(${page.currentPage-1})">前一页</A>]
+												<c:if test="${page.currentPage > 1}">
+													[<A href="javascript:to_page(${page.currentPage-1})">前一页</A>]
+												</c:if>
 												<B>${page.currentPage}</B>
-												[<A href="javascript:to_page(${page.currentPage+1})">后一页</A>] 
+												<c:if test="${page.currentPage < page.totalPage}">
+													[<A href="javascript:to_page(${page.currentPage+1})">后一页</A>] 
+												</c:if>
 												到
 												<input type="text" size="3" id="page" name="currentPage" />
 												页
