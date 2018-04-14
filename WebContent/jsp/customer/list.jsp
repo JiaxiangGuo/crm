@@ -9,7 +9,7 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
 <SCRIPT language=javascript>
 	function to_page(page){
 		if(page){
@@ -18,6 +18,35 @@
 		document.customerForm.submit();
 		
 	}
+
+	$(function(){
+		var url = "${pageContext.request.contextPath }/dict_findByCode.action";
+		var param = {"dict_type_code":"006"};
+		
+		$.post(url, param, function(data){
+			var id = "${model.level.dict_id}";
+			$(data).each(function(){
+				if(id == this.dict_id){
+					// JQ的DOM操作
+					$("#levelId").append("<option value='"+this.dict_id+"' selected>"+this.dict_item_name+"</option>");
+				}else{
+					$("#levelId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+				}
+			});
+		}, "json");
+		var param = {"dict_type_code":"002"};
+		$.post(url, param, function(data){
+			$(data).each(function(){
+				var id = "${model.source.dict_id}";
+				if(id == this.dict_id){
+					// JQ的DOM操作
+					$("#sourceId").append("<option value='"+this.dict_id+"' selected>"+this.dict_item_name+"</option>");
+				}else{
+					$("#sourceId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+				}
+			});
+		}, "json");
+	});
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -63,8 +92,21 @@
 												<TR>
 													<TD>客户名称：</TD>
 													<TD><INPUT class=textbox id=sChannel2
-														style="WIDTH: 80px" maxLength=50 name="custName"></TD>
-													
+														style="WIDTH: 80px" maxLength=50 name="cust_name" value="${model.cust_name }"></TD>
+													<TD>客户级别：</TD>
+													<td>
+														<select id="levelId" name="level.dict_id">
+															<option value="">--请选择--</option>
+															
+														</select>
+													</td>
+													<TD>客户来源：</TD>
+													<td>
+														<select id="sourceId" name="source.dict_id">
+															<option value="">--请选择--</option>
+															
+														</select>
+													</td>
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
 												</TR>

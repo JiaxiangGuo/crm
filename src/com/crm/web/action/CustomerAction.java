@@ -6,6 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import com.crm.domain.Customer;
+import com.crm.domain.Dict;
 import com.crm.domain.PageBean;
 import com.crm.service.CustomerService;
 import com.opensymphony.xwork2.ActionContext;
@@ -59,6 +60,24 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	 */
 	public String findByPage(){
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
+		//拼接查询的条件
+		String cust_name = customer.getCust_name();
+		System.out.println(cust_name);
+		if(cust_name != null && !cust_name.trim().isEmpty()){
+			criteria.add(Restrictions.like("cust_name", "%"+cust_name+"%"));
+		}
+		//拼接客户的级别
+		Dict level = customer.getLevel();
+		if(level != null && !level.getDict_id().trim().isEmpty()){
+			criteria.add(Restrictions.eq("level.dict_id", level.getDict_id()));
+		}
+		//拼接客户的来源
+		Dict source = customer.getSource();
+		if(source != null && !source.getDict_id().trim().isEmpty()){
+			criteria.add(Restrictions.eq("source.dict_id", source.getDict_id()));
+		}
+		
+		//查询
 		PageBean<Customer> page = customerService.findByPage(currentPage, pageSize, criteria);
 		
 		//压栈
