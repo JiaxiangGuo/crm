@@ -4,7 +4,10 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<!-- 设置上传文件大小 -->
+	<constant name="struts.multipart.maxSize" value="20971520"/>
 	<package name="crm" extends="struts-default" namespace="/">
+		
 		<!-- 配置全局的结果页面 -->
 		<global-results>
 			<result name="login" type="redirect">/login.jsp</result>
@@ -16,6 +19,13 @@
 		</action>
 		<action name="customer_*" class="customerAction" method="{1}">
 			<result name="customerList">/jsp/customer/list.jsp</result>
+			<result name="success" type="redirect">/jsp/customer/success.jsp</result>
+			<result name="input">/jsp/customer/msg.jsp</result>
+			<!-- 设置上传文件类型 -->
+			<!-- 引入默认拦截器 -->
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.allowedExtensions">.jpg,.txt</param>
+			</interceptor-ref>
 		</action>
 		<action name="dict_*" class="dictAction" method="{1}"></action>
 	</package>

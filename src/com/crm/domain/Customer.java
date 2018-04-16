@@ -22,6 +22,8 @@ public class Customer {
 	private Dict industry;
 	//客户的级别
 	private Dict level;
+	//上传文件保存的路径
+	private String file_path;
 	
 	public Long getCust_id() {
 		return cust_id;
@@ -125,6 +127,14 @@ public class Customer {
 
 	public void setLevel(Dict level) {
 		this.level = level;
+	}
+
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
 	}
 
 

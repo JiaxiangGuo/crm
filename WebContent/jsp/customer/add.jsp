@@ -9,14 +9,32 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		url = "${pageContext.request.contextPath }/dict_findByCode.action";
+		param = {"dict_type_code":"006"};
+		$.post(url, param, function(data){
+			$(data).each(function(){
+				$("#levelId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>")
+			});
+		}, "json");
+		param = {"dict_type_code":"002"};
+		$.post(url, param, function(data){
+			$(data).each(function(){
+				$("#sourceId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>")
+			});
+		}, "json");
+	});
 
+</script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
 		action="${pageContext.request.contextPath }/customer_add.action"
-		method=post>
+		method=post enctype="multipart/form-data">
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -57,8 +75,11 @@
 								</td>
 								<td>客户级别 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+								<!-- <INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_level"> -->
+								<select id="levelId" name="level.dict_id">
+									<option value="">--请选择--</option>
+								</select>
 								</td>
 							</TR>
 							
@@ -66,8 +87,11 @@
 								
 								<td>信息来源 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+								<!-- <INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_source"> -->
+								<select id="sourceId" name="source.dict_id">
+									<option value="">--请选择--</option>
+								</select>
 								</td>
 								<td>联系人：</td>
 								<td>
@@ -109,10 +133,9 @@
 								<INPUT class=textbox id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_fax">
 								</td>
-								<td>客户网址 ：</td>
+								<td>上传资质 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_website">
+									<input type="file" name="upload"/>
 								</td>
 							</TR>
 							<tr>

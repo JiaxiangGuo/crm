@@ -1,5 +1,9 @@
 package com.crm.web.action;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
@@ -9,6 +13,7 @@ import com.crm.domain.Customer;
 import com.crm.domain.Dict;
 import com.crm.domain.PageBean;
 import com.crm.service.CustomerService;
+import com.crm.utils.UploadUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -30,13 +35,47 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	public void setCustomerService(CustomerService customerService) {
 		this.customerService = customerService;
 	}
+	
+	/**
+	 * 文件的上传，需要在CustomerAction类中定义成员的属性，命名是有规则的！！
+	 * private File upload;		// 表示要上传的文件
+	 * private String uploadFileName;	表示是上传文件的名称（没有中文乱码）
+	 * private String uploadContentType;	表示上传文件的MIME类型
+	 * 提供set方法，拦截器就注入值了
+	 */
+	private File upload;
+	private String uploadFileName;
+	private String uploadContentType;
+	
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = UploadUtils.getUUIDName(uploadFileName);
+	}
+
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+
 	/**
 	 * 添加客户
 	 * @return
+	 * @throws IOException 
 	 */
-	public String add(){
+	public String add() throws IOException{
+		//保存图片
+		if(uploadFileName != null){
+			String filePath = "D:\\Program Files\\apache-tomcat-7.0.52\\webapps\\upload\\"+uploadFileName;
+			//新建一个文件
+			File file = new File(filePath);
+			//拷贝文件
+			FileUtils.copyFile(upload, file);
+			customer.setFile_path(filePath);
+		}
 		customerService.add(customer);
-		return NONE;
+		return SUCCESS;
 	}
 	
 	//属性驱动的方式

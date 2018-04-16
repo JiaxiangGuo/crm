@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="com.crm.domain.User" table="sys_user">
 		<id name="user_id" column="user_id">
-			<generator class="native"/>
+			<generator class="uuid"/>
 		</id>
 		
 		<property name="user_code" column="user_code"/>
