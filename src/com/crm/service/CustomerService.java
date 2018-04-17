@@ -15,4 +15,6 @@ public interface CustomerService {
 
 	Customer findById(Long cust_id);
 
+	void update(Customer customer);
+
 }

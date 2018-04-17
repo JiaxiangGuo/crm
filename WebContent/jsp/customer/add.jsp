@@ -115,24 +115,8 @@
 								</td>
 							</TR>
 							
+							
 							<TR>
-								<td>联系地址 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_address">
-								</td>
-								<td>邮政编码 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_zip">
-								</td>
-							</TR>
-							<TR>
-								<td>客户传真 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_fax">
-								</td>
 								<td>上传资质 ：</td>
 								<td>
 									<input type="file" name="upload"/>

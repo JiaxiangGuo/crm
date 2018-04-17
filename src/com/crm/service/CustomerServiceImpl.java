@@ -42,5 +42,11 @@ public class CustomerServiceImpl implements CustomerService {
 	 */
 	public Customer findById(Long cust_id) {
 		return customerDao.findById(cust_id);
+	}
+	/**
+	 * 修改客户
+	 */
+	public void update(Customer customer) {
+		customerDao.update(customer);
 	};
 }

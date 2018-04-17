@@ -21,6 +21,7 @@
 			<result name="customerList">/jsp/customer/list.jsp</result>
 			<result name="success" type="redirect">/jsp/customer/success.jsp</result>
 			<result name="input">/jsp/customer/msg.jsp</result>
+			<result name="edit">/jsp/customer/edit.jsp</result>
 			<!-- 设置上传文件类型 -->
 			<!-- 引入默认拦截器 -->
 			<interceptor-ref name="defaultStack">

@@ -9,15 +9,47 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var url = "${pageContext.request.contextPath }/dict_findByCode.action";
+		var param = {"dict_type_code":"006"};
+		
+		$.post(url, param, function(data){
+			var id = "${model.level.dict_id}";
+			$(data).each(function(){
+				if(id == this.dict_id){
+					// JQ的DOM操作
+					$("#levelId").append("<option value='"+this.dict_id+"' selected>"+this.dict_item_name+"</option>");
+				}else{
+					$("#levelId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+				}
+			});
+		}, "json");
+		var param = {"dict_type_code":"002"};
+		$.post(url, param, function(data){
+			$(data).each(function(){
+				var id = "${model.source.dict_id}";
+				if(id == this.dict_id){
+					// JQ的DOM操作
+					$("#sourceId").append("<option value='"+this.dict_id+"' selected>"+this.dict_item_name+"</option>");
+				}else{
+					$("#sourceId").append("<option value='"+this.dict_id+"'>"+this.dict_item_name+"</option>");
+				}
+			});
+		}, "json");
+	});
 
+</script>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/customerServlet?method=editsubmit"
-		method=post>
-		<input type="hidden" name="custId" value="${customer.custId }"/>
+		action="${pageContext.request.contextPath }/customer_update.action"
+		method=post enctype="multipart/form-data">
+		<input type="hidden" name="cust_id" value="${customer.cust_id }"/>
+		<input type="hidden" name="file_path" value="${customer.file_path }"/>
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
 			<TBODY>
@@ -46,29 +78,36 @@
 							</TR>
 						</TABLE>
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
+							
 							<TR>
 								<td>客户名称：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-											style="WIDTH: 180px" maxLength=50 name="custName" value="${customer.custName }">
+											style="WIDTH: 180px" maxLength=50 name="cust_name" value="${customer.cust_name }">
 								</td>
 								<td>客户级别 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custLevel" value="${customer.custLevel }">
+								<!-- <INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_level"> -->
+								<select id="levelId" name="level.dict_id">
+									<option value="">--请选择--</option>
+								</select>
 								</td>
 							</TR>
 							
 							<TR>
-								<td>信息来源：</td>
+								<td>信息来源 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custSource" value="${customer.custSource }">
+								<!-- <INPUT class=textbox id=sChannel2
+														style="WIDTH: 180px" maxLength=50 name="cust_source"> -->
+								<select id="sourceId" name="source.dict_id">
+									<option value="">--请选择--</option>
+								</select>
 								</td>
 								<td>联系人：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custLinkman" value="${customer.custLinkman }">
+														style="WIDTH: 180px" maxLength=50 name="cust_linkman" value="${customer.cust_linkman }">
 								</td>
 							</TR>
 							<TR>
@@ -77,39 +116,22 @@
 								<td>固定电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custPhone" value="${customer.custPhone }">
+														style="WIDTH: 180px" maxLength=50 name="cust_phone" value="${customer.cust_phone }">
 								</td>
 								<td>移动电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custMobile" value="${customer.custMobile }">
+														style="WIDTH: 180px" maxLength=50 name="cust_mobile" value="${customer.cust_mobile }">
 								</td>
 							</TR>
 							
 							<TR>
-								<td>联系地址 ：</td>
+								<td>上传资质 ：</td>
 								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custAddress" value="${customerDetail.custAddress }">
-								</td>
-								<td>邮政编码 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custZip" value="${customerDetail.custZip }">
+									<input type="file" name="upload"/>
 								</td>
 							</TR>
-							<TR>
-								<td>客户传真 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custFax" value="${customerDetail.custFax }">
-								</td>
-								<td>客户网址 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="custWebsite" value="${customerDetail.custWebsite }">
-								</td>
-							</TR>
+							
 							<tr>
 								<td rowspan=2>
 								<INPUT class=button id=sButton2 type=submit

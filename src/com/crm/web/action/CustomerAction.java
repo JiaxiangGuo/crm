@@ -91,6 +91,30 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return NONE;
 	}
 	
+	/**
+	 * 修改客户
+	 */
+	public String edit(){
+		customer = customerService.findById(customer.getCust_id());
+		ActionContext.getContext().getValueStack().set("customer",customer);
+		return "edit";
+	}
+	public String update() throws IOException{
+		if(uploadFileName != null){
+			File file;
+			if(customer.getFile_path() != null){
+				file = new File(customer.getFile_path());
+				file.delete();
+			}
+			String filePath = "D:\\Program Files\\apache-tomcat-7.0.52\\webapps\\upload\\"+uploadFileName;
+			file = new File(filePath);
+			FileUtils.copyFile(upload, file);
+			customer.setFile_path(filePath);
+		}
+		customerService.update(customer);
+		return NONE;
+	}
+	
 	//属性驱动的方式
 	//当前页，默认为1
 	private Integer currentPage = 1;

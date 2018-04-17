@@ -59,4 +59,11 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 		return this.getHibernateTemplate().get(Customer.class, cust_id);
 	}
 	
+	/**
+	 * 修改客户
+	 */
+	public void update(Customer customer) {
+		this.getHibernateTemplate().update(customer);
+	}
+	
 }
