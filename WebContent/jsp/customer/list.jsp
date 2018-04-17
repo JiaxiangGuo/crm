@@ -143,7 +143,7 @@
 													<TD>
 													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=${customer.cust_id}">修改</a>
 													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+													<a href="${pageContext.request.contextPath }/customer_delete.action?cust_id=${customer.cust_id}">删除</a>
 													</TD>
 												</TR>
 												

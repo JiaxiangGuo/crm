@@ -78,6 +78,19 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		return SUCCESS;
 	}
 	
+	/**
+	 * 删除客户
+	 */
+	public String delete(){
+		customer = customerService.findById(customer.getCust_id());
+		if(customer.getFile_path() != null){
+			File file = new File(customer.getFile_path());
+			file.delete();
+		}
+		customerService.delete(customer);
+		return NONE;
+	}
+	
 	//属性驱动的方式
 	//当前页，默认为1
 	private Integer currentPage = 1;

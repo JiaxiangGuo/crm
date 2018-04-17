@@ -30,5 +30,17 @@ public class CustomerServiceImpl implements CustomerService {
 	 */
 	public PageBean<Customer> findByPage(Integer currentPage, Integer pageSize, DetachedCriteria criteria) {
 		return customerDao.findByPage(currentPage, pageSize, criteria);
+	}
+	/**
+	 * 删除客户
+	 */
+	public void delete(Customer customer) {
+		customerDao.delete(customer);
+	}
+	/**
+	 * 通过id查找用户
+	 */
+	public Customer findById(Long cust_id) {
+		return customerDao.findById(cust_id);
 	};
 }
