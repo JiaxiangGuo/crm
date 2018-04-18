@@ -29,6 +29,9 @@
 			</interceptor-ref>
 		</action>
 		<action name="dict_*" class="dictAction" method="{1}"></action>
+		<action name="linkman_*" class="linkmanAction" method="{1}">
+			<result name="list">/jsp/linkman/list.jsp</result>
+		</action>
 	</package>
 </struts>
 

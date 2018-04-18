@@ -138,7 +138,6 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		DetachedCriteria criteria = DetachedCriteria.forClass(Customer.class);
 		//拼接查询的条件
 		String cust_name = customer.getCust_name();
-		System.out.println(cust_name);
 		if(cust_name != null && !cust_name.trim().isEmpty()){
 			criteria.add(Restrictions.like("cust_name", "%"+cust_name+"%"));
 		}

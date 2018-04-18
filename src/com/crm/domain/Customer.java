@@ -1,5 +1,6 @@
 package com.crm.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Customer {
@@ -24,6 +25,9 @@ public class Customer {
 	private Dict level;
 	//上传文件保存的路径
 	private String file_path;
+	
+	//和联系人配置一对多
+	private Set<Linkman> linkmans = new HashSet<>();
 	
 	public Long getCust_id() {
 		return cust_id;
@@ -135,6 +139,14 @@ public class Customer {
 
 	public void setFile_path(String file_path) {
 		this.file_path = file_path;
+	}
+
+	public Set<Linkman> getLinkmans() {
+		return linkmans;
+	}
+
+	public void setLinkmans(Set<Linkman> linkmans) {
+		this.linkmans = linkmans;
 	}
 
 
