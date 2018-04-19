@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="com.crm.domain.Linkman" table="cst_linkman">
 		<id name="lkm_id" column="lkm_id">
-			<generator class="uuid"/>
+			<generator class="native"/>
 		</id>
 		
 		<property name="lkm_name" column="lkm_name"/>
@@ -18,7 +18,7 @@
 		<property name="lkm_position" column="lkm_position"/>
 		<property name="lkm_memo" column="lkm_memo"/>
 		
-		<many-to-one name="customer" class="com.crm.domain.Customer" column="lkm_cust_id"></many-to-one>
+		<many-to-one name="customer" class="com.crm.domain.Customer" column="lkm_cust_id" not-null="true"/>
 	</class>
 	
 </hibernate-mapping>    

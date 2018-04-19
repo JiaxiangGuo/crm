@@ -3,17 +3,14 @@ package com.crm.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Customer {
 	private Long cust_id;
 	private String cust_name;
 	private Long cust_user_id;
 	
 	private Long cust_create_id;
-	/*private String cust_source;
-	private String cust_industry;
-	
-	private String cust_level;*/
-	private String cust_linkman;
 	private String cust_phone;
 	private String cust_mobile;
 
@@ -27,7 +24,8 @@ public class Customer {
 	private String file_path;
 	
 	//和联系人配置一对多
-	private Set<Linkman> linkmans = new HashSet<>();
+	@JSONField(serialize = false)
+	private Set<Linkman> linkmans = new HashSet<Linkman>();
 	
 	public Long getCust_id() {
 		return cust_id;
@@ -61,37 +59,6 @@ public class Customer {
 		this.cust_create_id = cust_create_id;
 	}
 
-	/*public String getCust_source() {
-		return cust_source;
-	}
-
-	public void setCust_source(String cust_source) {
-		this.cust_source = cust_source;
-	}
-
-	public String getCust_industry() {
-		return cust_industry;
-	}
-
-	public void setCust_industry(String cust_industry) {
-		this.cust_industry = cust_industry;
-	}
-
-	public String getCust_level() {
-		return cust_level;
-	}
-
-	public void setCust_level(String cust_level) {
-		this.cust_level = cust_level;
-	}*/
-
-	public String getCust_linkman() {
-		return cust_linkman;
-	}
-
-	public void setCust_linkman(String cust_linkman) {
-		this.cust_linkman = cust_linkman;
-	}
 
 	public String getCust_phone() {
 		return cust_phone;

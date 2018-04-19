@@ -1,8 +1,11 @@
 package com.crm.dao;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 
 import com.crm.domain.Customer;
+import com.crm.domain.Linkman;
 import com.crm.domain.PageBean;
 
 public interface CustomerDao {
@@ -16,5 +19,8 @@ public interface CustomerDao {
 	Customer findById(Long cust_id);
 
 	void update(Customer customer);
+
+	List<Customer> findAll();
+
 
 }

@@ -82,6 +82,7 @@
 												<TR
 													style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
 													<TD>联系人名称</TD>
+													<TD>所属客户</TD>
 													<TD>性别</TD>
 													<TD>办公电话</TD>
 													<TD>手机</TD>
@@ -91,6 +92,7 @@
 												<TR
 													style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 													<TD>${linkman.lkm_name }</TD>
+													<TD>${linkman.customer.cust_name }</TD>
 													<TD>${linkman.lkm_gender }</TD>
 													<TD>${linkman.lkm_phone }</TD>
 													<TD>${linkman.lkm_mobile }</TD>

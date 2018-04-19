@@ -11,4 +11,6 @@ public interface LinkmanDao {
 
 	PageBean<Linkman> findByPage(Integer currentPage, Integer pageSize, DetachedCriteria criteria);
 
+	void add(Linkman linkman);
+
 }

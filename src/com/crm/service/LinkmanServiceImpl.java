@@ -21,5 +21,13 @@ public class LinkmanServiceImpl implements LinkmanService {
 		return linkmanDao.findByPage(currentPage, pageSize, criteria);
 	}
 	
+	/**
+	 *添加联系人
+	 */
+	public void add(Linkman linkman) {
+		linkmanDao.add(linkman);
+		
+	}
+	
 	
 }

@@ -2,10 +2,12 @@ package com.crm.web.action;
 
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 
 import com.crm.domain.Linkman;
 import com.crm.domain.PageBean;
+import com.crm.service.CustomerService;
 import com.crm.service.LinkmanService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -53,6 +55,16 @@ public class LinkmanAction extends ActionSupport implements ModelDriven<Linkman>
 		valueStack.set("page", page);
 		return "list";
 	}
+	
+	/**
+	 * 添加联系人
+	 */
+	public String add(){
+		linkmanService.add(linkman);
+		return NONE;
+	}
+	
+	
 	
 
 }

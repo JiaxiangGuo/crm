@@ -8,6 +8,7 @@ import org.springframework.expression.spel.ast.Projection;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import com.crm.domain.Customer;
+import com.crm.domain.Linkman;
 import com.crm.domain.PageBean;
 /**
  * 客户模块
@@ -65,5 +66,13 @@ public class CustomerDaoImpl extends HibernateDaoSupport implements CustomerDao 
 	public void update(Customer customer) {
 		this.getHibernateTemplate().update(customer);
 	}
+
+	/**
+	 * 查询所有客户
+	 */
+	public List<Customer> findAll() {
+		return (List<Customer>) this.getHibernateTemplate().find("from Customer");
+	}
+
 	
 }

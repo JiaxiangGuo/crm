@@ -2,6 +2,7 @@ package com.crm.web.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
@@ -13,6 +14,7 @@ import com.crm.domain.Customer;
 import com.crm.domain.Dict;
 import com.crm.domain.PageBean;
 import com.crm.service.CustomerService;
+import com.crm.utils.FastJsonUtil;
 import com.crm.utils.UploadUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -161,5 +163,14 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		
 		return "customerList";
 	}
-
+	/**
+	 * 查询所有用户
+	 */
+	public String findAll(){
+		List<Customer> list = customerService.findAll();
+		String jsonString = FastJsonUtil.toJSONString(list);
+		FastJsonUtil.write_json(ServletActionContext.getResponse(), jsonString);
+		System.out.println(jsonString);
+		return NONE;
+	}
 }
