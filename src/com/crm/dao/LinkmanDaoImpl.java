@@ -54,4 +54,11 @@ public class LinkmanDaoImpl extends HibernateDaoSupport implements LinkmanDao{
 		this.getHibernateTemplate().update(linkman);
 	}
 
+	/**
+	 * 删除联系人
+	 */
+	public void delete(Linkman linkman) {
+		this.getHibernateTemplate().delete(linkman);
+	}
+
 }

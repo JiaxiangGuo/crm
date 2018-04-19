@@ -40,6 +40,13 @@ public class LinkmanServiceImpl implements LinkmanService {
 	public void update(Linkman linkman) {
 		linkmanDao.update(linkman);
 	}
+
+	/**
+	 * 删除联系人
+	 */
+	public void delete(Linkman linkman) {
+		linkmanDao.delete(linkman);
+	}
 	
 	
 }

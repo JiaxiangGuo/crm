@@ -17,4 +17,6 @@ public interface LinkmanDao {
 
 	void update(Linkman linkman);
 
+	void delete(Linkman linkman);
+
 }

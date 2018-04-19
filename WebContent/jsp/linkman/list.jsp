@@ -100,7 +100,7 @@
 													<TD>
 													<a href="${pageContext.request.contextPath }/linkman_edit?lkm_id=${linkman.lkm_id}">修改</a>
 													&nbsp;&nbsp;
-													<a href="${pageContext.request.contextPath }/linkmanServlet?method=delete&lkmId=${linkman.lkm_id}">删除</a>
+													<a href="${pageContext.request.contextPath }/linkman_delete?lkm_id=${linkman.lkm_id}&customer.cust_id=${linkman.customer.cust_id }">删除</a>
 													</TD>
 												</TR>
 												

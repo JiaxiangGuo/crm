@@ -77,4 +77,16 @@ public class LinkmanAction extends ActionSupport implements ModelDriven<Linkman>
 		linkmanService.update(linkman);
 		return NONE;
 	}
+	
+	/**
+	 * 删除联系人
+	 */
+	public String delete(){
+		
+		linkmanService.delete(linkman);
+		return NONE;
+	}
+	
+	
+	
 }
