@@ -65,6 +65,16 @@ public class LinkmanAction extends ActionSupport implements ModelDriven<Linkman>
 	}
 	
 	
-	
-
+	/**
+	 * 修改联系人
+	 */
+	public String edit(){
+		linkman = linkmanService.findById(linkman.getLkm_id());
+		ActionContext.getContext().getValueStack().set("linkman", linkman);
+		return "edit";
+	}
+	public String update(){
+		linkmanService.update(linkman);
+		return NONE;
+	}
 }

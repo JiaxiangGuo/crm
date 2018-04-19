@@ -13,4 +13,8 @@ public interface LinkmanService {
 
 	void add(Linkman linkman);
 
+	Linkman findById(Long lkm_id);
+
+	void update(Linkman linkman);
+
 }

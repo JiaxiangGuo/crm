@@ -39,5 +39,19 @@ public class LinkmanDaoImpl extends HibernateDaoSupport implements LinkmanDao{
 	public void add(Linkman linkman) {
 		this.getHibernateTemplate().save(linkman);
 	}
+	
+	/**
+	 * 查询联系人
+	 */
+	public Linkman findById(Long lkm_id) {
+		return this.getHibernateTemplate().get(Linkman.class, lkm_id);
+	}
+
+	/**
+	 * 修改联系人
+	 */
+	public void update(Linkman linkman) {
+		this.getHibernateTemplate().update(linkman);
+	}
 
 }

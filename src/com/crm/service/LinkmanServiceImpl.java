@@ -28,6 +28,18 @@ public class LinkmanServiceImpl implements LinkmanService {
 		linkmanDao.add(linkman);
 		
 	}
+	/**
+	 * 查询联系人
+	 */
+	public Linkman findById(Long lkm_id) {
+		return linkmanDao.findById(lkm_id);
+	}
+	/**
+	 * 修改联系人
+	 */
+	public void update(Linkman linkman) {
+		linkmanDao.update(linkman);
+	}
 	
 	
 }
