@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
+import com.crm.domain.Customer;
 import com.crm.domain.Linkman;
 import com.crm.domain.PageBean;
 import com.crm.service.CustomerService;
@@ -49,6 +51,14 @@ public class LinkmanAction extends ActionSupport implements ModelDriven<Linkman>
 	public String findByPage(){
 		DetachedCriteria criteria = DetachedCriteria.forClass(Linkman.class);
 		
+		String lkm_name = linkman.getLkm_name();
+		if(lkm_name != null && !lkm_name.trim().isEmpty()){
+			criteria.add(Restrictions.like("lkm_name", "%"+lkm_name+"%"));
+		}
+		Customer customer = linkman.getCustomer();
+		if(customer != null && customer.getCust_id() != null){
+			criteria.add(Restrictions.eq("customer.cust_id", customer.getCust_id()));
+		}
 		PageBean<Linkman> page = linkmanService.findByPage(currentPage, pageSize, criteria);
 		//压栈
 		ValueStack valueStack = ActionContext.getContext().getValueStack();

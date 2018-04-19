@@ -9,7 +9,7 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.3.min.js"></script>
 <SCRIPT language=javascript>
 	function to_page(page){
 		if(page){
@@ -18,6 +18,20 @@
 		document.customerForm.submit();
 		
 	}
+	$(function(){
+		url="${pageContext.request.contextPath }/customer_findAll.action";
+		param = {};
+		id = "${model.customer.cust_id}";
+		$.post(url, param, function(data){
+			$(data).each(function(){
+				if(id == this.cust_id){
+					$("#customerId").append("<option value='"+this.cust_id+"' selected>"+this.cust_name+"</option>")
+				}else{
+					$("#customerId").append("<option value='"+this.cust_id+"'>"+this.cust_name+"</option>")
+				}	
+			});
+		}, "json");
+	});
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -64,6 +78,13 @@
 													<TD>联系人名称：</TD>
 													<TD><INPUT class=textbox id=sChannel2
 														style="WIDTH: 80px" maxLength=50 name="lkm_name"></TD>
+													
+													<TD>所属客户：</TD>
+													<TD>
+														<select id="customerId" name="customer.cust_id">
+															<option value="">--请选择--</option>
+														</select>
+													</TD>
 													
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
